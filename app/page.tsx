@@ -1,6 +1,7 @@
 import { supabase } from "@/lib/supabaseClient";
 import CaptureBox from "./components/CaptureBox";
 import InspirationCard from "./components/InspirationCard";
+import VisitCounter from "./components/VisitCounter";
 
 type Inspiration = {
   id: string;
@@ -52,6 +53,7 @@ export default async function Home() {
   return (
     <main className="min-h-screen bg-neutral-50 px-6 py-10">
       <div className="mx-auto max-w-7xl">
+        <VisitCounter />
         <div className="mb-8">
           <h1 className="text-3xl font-semibold text-neutral-900">
             MirrorMind

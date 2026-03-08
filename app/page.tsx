@@ -52,7 +52,6 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen bg-neutral-50 px-6 py-10">
-      <VisitCounter />
       <div className="mx-auto max-w-7xl">
         <VisitCounter />
         <div className="mb-8">

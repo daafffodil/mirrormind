@@ -1,11 +1,22 @@
 import { NextResponse } from "next/server";
-import { revalidatePath } from "next/cache";  // 引入 revalidatePath，用来刷新缓存
-import { supabase } from "@/lib/supabaseClient";  // 引入 supabase 客户端
+import { revalidatePath } from "next/cache";
+import { supabase } from "@/lib/supabaseClient";
 
 // 删除某个灵感的 API
 export async function DELETE(request: Request) {
-  const { searchParams } = new URL(request.url);  // 获取请求的 URL 参数
-  const id = searchParams.get("id");  // 获取需要删除的灵感 ID
+  const { searchParams } = new URL(request.url);
+  let id = searchParams.get("id");
+
+  if (!id) {
+    try {
+      const body = await request.json();
+      if (typeof body?.id === "string") {
+        id = body.id;
+      }
+    } catch {
+      // ignore invalid JSON body
+    }
+  }
 
   // 如果没有提供 ID，则返回错误信息
   if (!id) {
@@ -16,7 +27,7 @@ export async function DELETE(request: Request) {
   const { data, error } = await supabase
     .from("inspirations")
     .delete()
-    .eq("id", id);  // 使用 eq 来删除指定 ID 的数据
+    .eq("id", id); // 使用 eq 来删除指定 ID 的数据
 
   // 如果发生错误，则返回错误信息
   if (error) {

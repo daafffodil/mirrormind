@@ -19,6 +19,8 @@ function getOptimisticCount() {
 
 export default function VisitCounter() {
   const [count, setCount] = useState<number | null>(() => getOptimisticCount());
+export default function VisitCounter() {
+  const [count, setCount] = useState<number>(0);
   const fetchedRef = useRef(false);
 
   useEffect(() => {

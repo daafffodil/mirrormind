@@ -38,3 +38,15 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 Deployment refresh
 
 test
+## Database
+
+### Create `visit_counter` table
+
+Run the SQL script below in your database to create and initialize the singleton visit counter table:
+
+```sql
+-- file: sql/create_visit_counter.sql
+```
+
+This script creates `visit_counter(id SERIAL PRIMARY KEY, count INTEGER NOT NULL DEFAULT 0)`,
+adds a singleton constraint, and seeds one default row.

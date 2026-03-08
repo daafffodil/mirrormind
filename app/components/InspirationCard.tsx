@@ -32,16 +32,12 @@ export default function InspirationCard({
   setDeleting(true);
 
   try {
-    const res = await fetch("/api/delete-inspiration", {
+    const res = await fetch(`/api/delete-inspiration?id=${item.id}`, {
       method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id: item.id }),
     });
 
     const raw = await res.text();
-    let result: any = null;
+    let result: unknown = null;
 
     try {
       result = raw ? JSON.parse(raw) : null;
